@@ -1,6 +1,6 @@
 from flask import Flask, request, make_response, redirect, render_template
 
-todos = ['TODO 1', 'TODO 2', 'TODO 3', 'TODO 4', 'TODO 5']
+todos = ['comprar cafe', 'enviar solicitud de compra', 'TODO 3', 'TODO 4', 'TODO 5']
 app = Flask(__name__)
 
 @app.route('/')

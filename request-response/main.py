@@ -4,6 +4,8 @@ from flask_wtf import FlaskForm
 from wtforms.fields import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired
 
+#test
+import unittest
 todos = ['comprar cafe', 'enviar solicitud de compra', 'TODO 3', 'TODO 4', 'TODO 5']
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
@@ -15,6 +17,11 @@ class Loginform(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField("Enviar")
 
+@app.cli.command()
+def test():
+    test = unittest.TestLoader().discover('tests')
+    unittest.TextTestRunner().run(test)
+    
 @app.errorhandler(404)
 def not_found(error):
     return render_template('404.html', error=error)

@@ -27,7 +27,7 @@ def index():
     session['user_ip']=user_ip
     return response
 
-@app.route('/hello', methods=['GET', 'POST'])
+@app.route('/hello', methods=['GET'])
 def hello():
     #user_ip = request.cookies.get('user_ip')
     user_ip = session.get('user_ip')
@@ -39,11 +39,11 @@ def hello():
         'login_form': login_form,
         'username': username
     }
-    if login_form.validate_on_submit():
-        username = login_form.username.data
-        session['username'] = username
-        flash('Nombre de usuario registrado con exito')
-        return redirect(url_for('index'))
+    # if login_form.validate_on_submit():
+    #     username = login_form.username.data
+    #     session['username'] = username
+    #     flash('Nombre de usuario registrado con exito')
+    #     return redirect(url_for('index'))
         # dete ta cuando se manda un post y valida una forma
     #return 'Hello World from {} ip'.format(user_ip)
     return render_template( 'hello.html', **context) 

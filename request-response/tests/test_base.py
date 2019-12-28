@@ -25,10 +25,23 @@ class MainTest(TestCase):
         self.assert200(response)
     
     def test_hello_post(self):
-        fake_user  = {
-            'username': 'fake',
-            'password': 'fake-password'
-        }
-        response = self.client.post(url_for('hello'), data=fake_user)
-        self.assertRedirects(response, url_for('index'))
+        # fake_user  = {
+        #     'username': 'fake',
+        #     'password': 'fake-password'
+        # }
+        response = self.client.post(url_for('hello'))
+        #self.assertRedirects(response, url_for('index'))
+        self.assertTrue(response.status_code, 405)
+    
+    def test_auth_blueprint_exists(self):
+        self.assertIn('auth', self.app.blueprints)
+    
+    def test_auth_login_get(self):
+        response = self.client.get(url_for('auth.login'))
+        self.assert200(response)
+    
+    def test_auth_login_template(self):
+        self.client.get(url_for('auth.login')) # renderea este login
+        self.assertTemplateUsed('login.html') #verifica el template rendereado 
+
 

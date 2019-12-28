@@ -24,7 +24,7 @@ def index():
 @app.route('/hello')
 def hello():
     #user_ip = request.cookies.get('user_ip')
-    user_ip = request.session.get('user_ip')
+    user_ip = session.get('user_ip')
     context = {
         'user_ip': user_ip,
         'todos': todos

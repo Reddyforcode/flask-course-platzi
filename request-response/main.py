@@ -1,27 +1,16 @@
-from flask import Flask, request, make_response, redirect, render_template, session, url_for, flash
-from flask_bootstrap import Bootstrap
-from flask_wtf import FlaskForm
-from wtforms.fields import StringField, PasswordField, SubmitField
-from wtforms.validators import DataRequired
-
+from flask import request, make_response, redirect, render_template, session, url_for, flash
+from app import create_app
+from app.forms import LoginForm
 #test
 import unittest
 todos = ['comprar cafe', 'enviar solicitud de compra', 'TODO 3', 'TODO 4', 'TODO 5']
-app = Flask(__name__)
-app.config.from_pyfile('config.py')
-bootstrap = Bootstrap(app) 
-
-class Loginform(FlaskForm):
-    # campo ara username and pass
-    username = StringField('Nombre de Usuario', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    submit = SubmitField("Enviar")
+app = create_app()
 
 @app.cli.command()
 def test():
     test = unittest.TestLoader().discover('tests')
     unittest.TextTestRunner().run(test)
-    
+
 @app.errorhandler(404)
 def not_found(error):
     return render_template('404.html', error=error)
@@ -42,7 +31,7 @@ def index():
 def hello():
     #user_ip = request.cookies.get('user_ip')
     user_ip = session.get('user_ip')
-    login_form = Loginform()
+    login_form = LoginForm()
     username = session.get('username')
     context = {
         'user_ip': user_ip,

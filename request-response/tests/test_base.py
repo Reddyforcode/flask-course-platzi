@@ -45,3 +45,10 @@ class MainTest(TestCase):
         self.assertTemplateUsed('login.html') #verifica el template rendereado 
 
 
+    def test_auth_login_post(self):
+        fake_form = {
+            'username' : 'fake',
+            'password' : 'fake-password'
+        }
+        response = self.client.post(url_for('auth.login'), data=fake_form)
+        self.assertRedirects(response, url_for('index'))

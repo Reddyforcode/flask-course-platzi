@@ -11,7 +11,6 @@ class Loginform(FlaskForm):
 """
 
 class LoginForm(FlaskForm):
-    # validators = 
     username = StringField('Nombre de Usuario', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Enviar')
